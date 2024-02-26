@@ -9,7 +9,7 @@ addLocationForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let idLocationInput = document.getElementById("input-idLocation");
+    //let idLocationInput = document.getElementById("input-idLocation");
     let locationNameInput = document.getElementById("input-locationName");
     let streetAddressInput = document.getElementById("input-streetAddress");
     let cityInput = document.getElementById("input-city");
@@ -17,7 +17,7 @@ addLocationForm.addEventListener("submit", function (e) {
     let zipcodeInput = document.getElementById("input-zipcode");
 
     // Get the values from the form fields
-    let idLocationValue = idLocationInput.value;
+    //let idLocationValue = idLocationInput.value;
     let locationNameValue = locationNameInput.value;
     let streetAddressValue = streetAddressInput.value;
     let cityValue = cityInput.value;
@@ -26,7 +26,7 @@ addLocationForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        idLocation: idLocationValue,
+        //idLocation: idLocationValue,
         locationName: locationNameValue,
         streetAddress: streetAddressValue,
         city: cityValue,
@@ -47,7 +47,7 @@ addLocationForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            idLocationInput.value = '';
+            //idLocationInput.value = '';
             locationNameInput.value = '';
             streetAddressInput.value = '';
             cityInput.value = '';
@@ -103,7 +103,7 @@ addRowToTable = (data) => {
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deletePerson(newRow.id);
+        deleteLocation(newRow.idLocation);
     };
 
     // Add the cells to the row 
@@ -116,8 +116,19 @@ addRowToTable = (data) => {
     row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.idLocation);
     
     // Add the row to the table
     currentTable.appendChild(row);
+
+    // Start of new Step 8 code for adding new data to the dropdown menu for updating people
+    
+    // Find drop down menu, create a new option, fill data in the option (full name, id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
+    let selectMenu = document.getElementById("locationSelect");
+    let option = document.createElement("option");
+    option.text = newRow.locationName;
+    option.value = newRow.idLocation;
+    selectMenu.add(option);
+    // End of new step 8 code.
 }

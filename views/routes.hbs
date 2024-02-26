@@ -1,0 +1,43 @@
+<body>
+<nav>
+    <a href='/'>Home</a>
+    <a href='/routes.hbs'>Routes</a>
+    <a href='/routetypes.hbs'>Route Types</a>
+    <a href='/routesetters.hbs'>Route Setters</a>
+</nav>
+
+<table id="routes-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.idRoute}}</td>
+            <td>{{this.routeName}}</td>
+            <td>{{this.dateSet}}</td>
+            <td>{{this.routeGrade}}</td>
+            <td>{{this.active}}</td>
+            <td>{{this.idLocation}}</td>
+            <td>{{this.idRouteSetter}}</td>
+            <td>{{this.idRouteType}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</body>

@@ -1,6 +1,15 @@
+<body>
+<nav>
+    <a href='/'>Home</a>
+    <a href='/routes.hbs'>Routes</a>
+    <a href='/routetypes.hbs'>Route Types</a>
+    <a href='/routesetters.hbs'>Route Setters</a>
+</nav>
+
+
 {{!-- Create a table --}}
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="./js/delete_location.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <table id="locations-table">
     {{!-- Header section --}}
     <thead>
@@ -13,7 +22,7 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th>delete</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -23,7 +32,7 @@
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
         <tr data-value="{{this.idLocation}}">
-            <td>{{this.idLocation}}</td> 
+            <td>{{this.idLocation}}</td>
             <td>{{this.locationName}}</td>
             <td>{{this.streetAddress}}</td>
             <td>{{this.city}}</td>
@@ -34,31 +43,53 @@
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_location.js"></script>
 
 {{!-- Form to add a record to the table  --}}
-<h2>Adding Data with AJAX</h2>
+<h2>Add a New Location</h2>
 <p>To add a new location, please enter its information below and click 'Submit'!</p>
 <form id="add-location-form-ajax">
-    <label for="input-idLocation">Location Id: </label> 
-    <input type="number" name="input-idLocation" id="input-idLocation"> 
+    {{!-- <label for="input-idLocation">Location Id: </label> 
+    <input type="number" name="input-idLocation" id="input-idLocation"> --}}
 
     <label for="input-locationName">Location Name: </label>
-    <input type="text" name="input-locationName" id="input-locationName">
+    <input type="text" name="input-locationName" id="input-locationName" required>
     
     <label for="input-streetAddress">Street Address: </label>
-    <input type="text" name="input-streetAddress" id="input-streetAddress">
+    <input type="text" name="input-streetAddress" id="input-streetAddress" required>
 
     <label for="input-city">City: </label>
-    <input type="text" name="input-city" id="input-city">
+    <input type="text" name="input-city" id="input-city" required>
 
     <label for="input-state">State: </label>
-    <input type="text" name="input-state" id="input-state">
+    <input type="text" name="input-state" id="input-state" required>
 
     <label for="input-zipcode">Zipcode: </label>
-    <input type="number" name="input-zipcode" id="input-zipcode">
+    <input type="number" name="input-zipcode" id="input-zipcode" required>
 
     <input type="submit">
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_location.js"></script>
+
+<h2>Update Location Form</h2>
+<p>Whoops! Did you make a mistake entering the location's address info? No worries, this form has you covered!</p>
+<form id="update-location-form-ajax">
+
+    <label for="input-locationName">Location Name: </label>
+    <select name="input-locationName" id="locationSelect">
+        <option value="test">Select a Location</option>
+        {{#each data}}
+        <option value="{{this.idLocation}}">{{this.locationName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-streetAddress-update">Street Address: </label>
+    <input type="text" name="input-streetAddress-update" id="input-streetAddress-update" required>
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_location.js"></script>
+</body>
